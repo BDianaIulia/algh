@@ -1,14 +1,15 @@
 //https://www.infoarena.ro/problema/camionas
-
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <set>
 #define DIM 50010
 #define INF 1000000000
 
 using namespace std;
 
 vector<pair<int, int> > L[DIM*2];
+set <pair<int,int> > s;
 int v[DIM], D[DIM];
 int n, m, i, nod, vecin, cost, x, y, c, minim, g;
 
@@ -29,29 +30,27 @@ int main () {
     for( i = 2; i <= n; i++ )
         D[i] = INF;
 
-    for(;;)
+    s.insert( make_pair( 0 , 1 ) );
+
+    while( !s.empty() )
     {
-        minim = INF;
-        for( i = 1; i <= n; i++ )
-            if( v[i] == 0 && D[i] < minim )
-            {
-                minim = D[i];
-                nod = i;
-            }
+        nod = s.begin() -> second;
+        s.erase( s.begin() );
 
-        if( minim == INF )
-            break;
-
-        v[nod] = 1;
-        for( i = 0; i < L[nod].size(); i++)
+        for( i = 0; i < L[nod].size(); i++ )
         {
             vecin = L[nod][i].first;
             cost = L[nod][i].second;
 
-            if( cost < g && D[vecin] > D[nod] + 1 )
-                D[vecin] = D[nod] + 1;
-            else
-                D[vecin] = D[nod];
+            if( D[vecin] > D[nod]  )
+            {
+                s.erase(  make_pair( D[vecin], vecin ) );
+                if( cost < g )
+                    D[vecin] = D[nod] + 1;
+                else
+                    D[vecin] = D[nod];
+                s.insert(  make_pair( D[vecin], vecin ) );
+            }
         }
     }
 
