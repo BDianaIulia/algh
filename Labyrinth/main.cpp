@@ -77,7 +77,7 @@ int main()
     {
         for( int j = 0; j < m; j++ )
         {
-            if( matrix[i][j].st <= maxst && matrix[i][j].dr <= maxdr && matrix[i][j].val != 2 )
+            if( matrix[i][j].st <= maxst && matrix[i][j].dr <= maxdr && matrix[i][j].val == 1 )
                 counter++;
         }
     }
