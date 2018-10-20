@@ -48,24 +48,30 @@ int main()
 
             if( ivecin >= 0 && ivecin < n && jvecin >= 0 && jvecin < m && matrix[ivecin][jvecin].val == 0 )
             {
-                ultima++;
-                coada[0][ultima] = ivecin;
-                coada[1][ultima] = jvecin;
                 matrix[ivecin][jvecin].val = 1;
                 if( d == 0 )
                 {
                     matrix[ivecin][jvecin].dr = 1 + matrix[iactual][jactual].dr;
                     matrix[ivecin][jvecin].st = matrix[iactual][jactual].st;
+                    ultima++;
+                    coada[0][ultima] = ivecin;
+                    coada[1][ultima] = jvecin;
                 }
                 else if( d == 1 )
                     {
                         matrix[ivecin][jvecin].st = 1 + matrix[iactual][jactual].st;
                         matrix[ivecin][jvecin].dr = matrix[iactual][jactual].dr;
+                        ultima++;
+                        coada[0][ultima] = ivecin;
+                        coada[1][ultima] = jvecin;
                     }
                     else
                     {
                         matrix[ivecin][jvecin].dr = matrix[iactual][jactual].dr;
                         matrix[ivecin][jvecin].st = matrix[iactual][jactual].st;
+                        coada[0][prima] = ivecin;
+                        coada[1][prima] = jvecin;
+                        prima--;
                     }
             }
         }
